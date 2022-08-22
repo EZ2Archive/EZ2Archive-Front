@@ -15,9 +15,7 @@ export default {
 
 <style lang="scss">
 #app {
-  text-align: center;
   color: #2c3e50;
-  background-color: #DBDFFD;
 }
 
 #nav {

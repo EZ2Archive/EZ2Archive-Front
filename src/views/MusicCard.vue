@@ -123,9 +123,6 @@ export default {
   inherits: false;
 }
 
-.music-card{
-    background-color: #9BA3EB;
-}
 .music-card-norecord{
   border-style: solid;
   border-width: 3px;

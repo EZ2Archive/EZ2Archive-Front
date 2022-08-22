@@ -4,23 +4,26 @@
       flat
       dense
       color="#242F9B"
+      src="/resource/appbar_bg.svg"
+      height="60"
     >
       <router-link to="/">
-      <v-app-bar-title style="color:white" >
-      <h3>EZ2 ARCHIVE</h3>
-      </v-app-bar-title>
+      <v-img src="/resource/ez2archive_logo.svg" width="250" height="25" contain></v-img>
       </router-link>
       
-        
-
-      <v-spacer></v-spacer>
-
-      <v-btn v-for="(item, idx) in menuItems" :key="idx" color="transparent" x-large class="white--text text-h5 font-weight-black" elevation="0" :to="item.to">{{item.title}}</v-btn>
+      <div class="ml-10">
+        <v-btn v-for="(item, idx) in menuItems" :key="idx" color="transparent" x-large class="white--text text-h6 font-weight-black" elevation="0" :to="item.to">{{item.title}}</v-btn>
+      </div>
+      
       <v-spacer></v-spacer>
       <v-btn
         to="/login"
+        color="transparent"
+        class="white--text"
+        elevation="0"
       >
-        Login
+      <v-icon class="mr-1">mdi-key-variant</v-icon>
+      로그인
       </v-btn>
     </v-app-bar>
 </template>

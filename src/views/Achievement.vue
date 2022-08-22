@@ -1,5 +1,5 @@
 <template>
-<div class="ma-0">
+<div class="ma-0 achievement">
 
     <v-card width="100%" img="/resource/page_bg.jpg" class="ma-0" tile min-width="1200">
     <v-img src="/resource/page_bg.jpg" height="350" class="ma-0">
@@ -246,4 +246,7 @@ export default {
    margin: 100px 0px;
 }
 
+.achievement{
+    text-align: center;
+}
 </style>
