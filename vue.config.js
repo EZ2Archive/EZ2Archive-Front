@@ -3,7 +3,7 @@ module.exports = {
     'vuetify'
   ],
   outputDir: './docs',
-  publicPath: '/dev/',
+  publicPath: '/',
   lintOnSave: false,
   chainWebpack: config => {
     config
