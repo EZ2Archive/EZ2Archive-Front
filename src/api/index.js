@@ -37,11 +37,14 @@ export const achievement = {
     list(key, level){
         return request('get', `/achievement/list/${key}/${level}`)
     },
+    save(allCool, noMiss, musicInfoId, score){     
+        return request('post', `/achievement/save`, {allCool, noMiss, musicInfoId, score})
+    }
 
 }
 
 export const rank = {
     list(key, level){
-        return request('get', `/achievement/list`, {}, {keyType: key, level: level})
+        return request('get', `/rank/list/${key}/${level}`)
     }
 }

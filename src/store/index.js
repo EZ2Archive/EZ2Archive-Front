@@ -83,9 +83,14 @@ export default new Vuex.Store({
           alert('로그인 실패')
         })
     },
-    getAchievementList({commit}, {key, level}){
-      
+    getAchievementList({commit}, {key, level}){ 
       return api.achievement.list(matchKeyList[key], level)
+    },
+    saveAchievementScore({commit}, {allCool, noMiss, score, musicInfoId}){
+      return api.achievement.save(allCool, noMiss, musicInfoId, score)
+    },
+    getRankTableList({commit}, {key, level}){
+      return api.rank.list(matchKeyList[key], level)
     }
   },
   modules: {

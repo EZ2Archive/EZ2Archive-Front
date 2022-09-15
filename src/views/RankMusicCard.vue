@@ -3,7 +3,7 @@
     
     <v-card-actions class="music-img-wrapper">
         
-        <v-img :src="getDiskImg(music.NAME)" height="80" contain>
+        <v-img :src="getDiskImg(music.name)" height="80" contain>
             <template v-slot:placeholder>
                 <v-skeleton-loader
                 class="mx-auto"
@@ -11,7 +11,7 @@
                 ></v-skeleton-loader>
             </template>               
         </v-img>
-        <v-img class="diff-img" :src="getDiffImg(music.DIFFICULTY)" width="30" height="15" contain  />
+        <v-img class="diff-img" :src="getDiffImg(music.difficulty)" width="30" height="15" contain  />
     </v-card-actions>
     <div v-if="isVisibleTitle" class="d-flex justify-center align-center music-title mx-1">{{music.NAME}}</div>
     </v-card>

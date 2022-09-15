@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import firebase from 'firebase/app'
+import { mapActions } from 'vuex'
 import RankMusicCard from './RankMusicCard.vue'
 export default {
     data(){
@@ -118,11 +118,14 @@ export default {
     },
 
     methods:{
+        ...mapActions([
+          'getRankTableList'
+        ]),
         getRankList(rank){    
-            return this.musicList.filter( x => x.RANKS === rank)
+            return this.musicList.filter( x => x.rank === rank)
         },
         getNoRankList(){
-            return this.musicList.filter( x => x.RANKS === 0)
+            return this.musicList.filter( x => x.rank === 0)
         },
         reverseKeys(n) {
             return [...Array(n).keys()].reverse()
@@ -137,10 +140,15 @@ export default {
               this.maxRank = 0
               return;
             }
-            firebase.database().ref(this.currentKey).orderByChild('LEVEL').equalTo(this.currentLevel).once('value').then((snapshot) => {
-                this.musicList = Object.values(snapshot.toJSON())
-                this.maxRank = Math.max(...this.musicList.map(o => o.RANKS), 0);
-            });  
+            this.getRankTableList({key:this.currentKey, level: this.currentLevel})
+              .then(result => {
+                  this.musicList = result.data
+                  this.maxRank = Math.max(...this.musicList.map(o => o.rank), 0);
+              })
+            // firebase.database().ref(this.currentKey).orderByChild('LEVEL').equalTo(this.currentLevel).once('value').then((snapshot) => {
+            //     this.musicList = Object.values(snapshot.toJSON())
+            //     this.maxRank = Math.max(...this.musicList.map(o => o.RANKS), 0);
+            // });  
         }
     }
 

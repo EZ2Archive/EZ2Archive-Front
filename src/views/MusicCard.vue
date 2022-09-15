@@ -23,9 +23,9 @@
             </template>               
         </v-img>
         <v-row v-if="isEditScore" dense class="music-img-row font-weight-black">
-            <v-checkbox class="checkbox" dense v-model="isAllCool" label="All Cool" color="primary"></v-checkbox>
-            <v-checkbox class="checkbox" dense v-model="isNoMiss" label="No Miss" color="primary" ></v-checkbox>
-            <div class="save-btn"><v-btn class="font-weight-bold mt-3" x-small @click="isEditScore=false" color="primary">저장</v-btn></div>       
+            <v-checkbox class="checkbox" dense v-model="music.allCool" label="All Cool" color="primary"></v-checkbox>
+            <v-checkbox class="checkbox" dense v-model="music.noMiss" label="No Miss" color="primary" ></v-checkbox>
+            <div class="save-btn"><v-btn class="font-weight-bold mt-3" x-small @click="save" color="primary">저장</v-btn></div>       
         </v-row>
         <v-img :class="isEditScore ? 'diff-img music-img' : 'diff-img'" :src="getDiffImg(music.difficulty)" width="30" height="15" contain  />
         <v-img :class="isEditScore ? 'grade-img music-img' : 'grade-img'" :src="getGradeImg(music.grade)" width="40" contain  />
@@ -39,6 +39,7 @@
 
 <script>
 import VueNumberInput from 'vue-numeric-input'
+import { mapActions } from 'vuex'
 export default {
     props: {
         music: Object,
@@ -49,11 +50,7 @@ export default {
     },
     data(){
         return {
-            value: 1005000,
-            percentage: 95.34,
             isEditScore: false,
-            isAllCool: false,
-            isNoMiss: false,
             diffImgList: ['/difficulty/EZ.png', '/difficulty/NM.png', '/difficulty/HD.png', '/difficulty/SHD.png'],
             gradeImgList: ['/grade/F.png', '/grade/E.png', '/grade/D.png', '/grade/C.png', '/grade/B.png', 
                             '/grade/A.png', '/grade/A+.png', '/grade/S.png', '/grade/S+.png', '/grade/S++.png', '/grade/S+++.png'],
@@ -63,24 +60,24 @@ export default {
     computed:{
         cardStyle: function(){
             
-            if(this.value === 0){
+            if(this.music.score === -1){
                 return 'music-card-norecord'
             }
-            else if(this.value !== 0 && this.isAllCool === false && this.isNoMiss === false){
+            else if(this.music.score !== -1 && this.music.allCool === false && this.music.noMiss === false){
                 return 'music-card-record'
             }
-            else if(this.value !== 0 && this.isAllCool === false && this.isNoMiss === true){
+            else if(this.music.score !== -1 && this.music.allCool === false && this.music.noMiss === true){
                 return 'music-card-nomiss'
             }
-            else if(this.value !== 0 && this.isAllCool === true){
+            else if(this.music.score !== -1 && this.music.allCool === true){
                 return 'music-card-allcool'
             }
         }
     },  
     methods:{
-        randDiffImg(){
-            return this.diffImgList[Math.floor(Math.random() * this.diffImgList.length)]
-        },
+        ...mapActions([
+            'saveAchievementScore'
+        ]),
         getDiffImg(diff){
             return `/difficulty/${diff}.png`
         },
@@ -98,6 +95,24 @@ export default {
                 return ''
             }
             return `/grade/${grade}.png`
+        },
+        async save(){
+            try{
+                await this.saveAchievementScore({
+                    allCool: this.music.allCool,
+                    noMiss: this.music.noMiss,
+                    score: this.music.score,
+                    musicInfoId: this.music.musicInfoId,
+                })
+            }
+            catch(err){
+                console.log(err)
+                alert('저장실패')
+            }
+            finally{
+                this.isEditScore=false
+            }
+            
         }
     }
 }
