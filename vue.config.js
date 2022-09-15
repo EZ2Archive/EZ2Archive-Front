@@ -3,7 +3,7 @@ module.exports = {
     'vuetify'
   ],
   outputDir: './docs',
-  publicPath: '/',
+  publicPath: '/EZ2Archive-Front/',
   lintOnSave: false,
   chainWebpack: config => {
     config
