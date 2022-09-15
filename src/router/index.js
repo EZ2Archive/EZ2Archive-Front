@@ -19,15 +19,19 @@ const routes = [
         name: 'Home',
         component: Home
       },
-      {
-        path: '/select',
-        name: 'Select',
-        component: () => import('@/views/Select.vue')
-      },
       {        
         path: '/achievement/:key/:level',
         name: 'Achievement',
-        component: () => import('@/views/Achievement.vue')
+        component: () => import('@/views/Achievement.vue'),
+        beforeEnter: function(to, from, next){
+          if(store.getters.isAuth){
+            next();
+          }
+          else{
+            alert('로그인하세요')
+            next('/')
+          }
+        }
 
       },
       {
@@ -42,22 +46,6 @@ const routes = [
       },      
     ],
 
-  },
-
-  {
-    path: '/auth',
-    name: 'auth',
-    component: () => import(
-
-      '@/views/layout/LoginLayout'
-    ),
-    children:[
-      {
-        path:'/login',
-        name: 'login',
-        component: () => import('@/views/Login.vue')
-      }
-    ],
   },
   {
     path: '*',

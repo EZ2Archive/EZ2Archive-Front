@@ -1,10 +1,7 @@
 <template>
   <v-main class="ma-0">
-    <v-container
-      fluid
-      
-    >
-      <router-view />
+    <v-container>
+        <router-view />
     </v-container>
   </v-main>
 </template>

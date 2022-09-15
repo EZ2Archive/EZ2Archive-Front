@@ -1,33 +1,26 @@
 <template>
   <div id="app">
-    <router-view/>
+      <router-view></router-view>    
   </div>
 </template>
 <script>
 export default {
   name: 'App',
   created(){
-
+    this.$vuetify.theme.themes.light['primary'] = '#473395'
+    this.$vuetify.theme.themes.light['secondary'] = '#E3DBFF'
   }
-
 }
 </script>
 
-<style lang="scss">
-#app {
-  color: #2c3e50;
+<style>
+.v-btn:before {
+  opacity: 0 !important;
+  box-shadow: 0px 0px 0px 0px;
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.v-ripple__container {
+  opacity: 0 !important;
+  box-shadow: 0px 0px 0px 0px;
 }
 </style>

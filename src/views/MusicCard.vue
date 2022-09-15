@@ -2,19 +2,19 @@
     <v-card :class="cardStyle" class="ma-2 rounded music-card" width="130" height="100%" tile elevation="0">
 
     <v-card-text v-if="isEditScore" class="d-flex flex-column align-center" >
-        <VueNumberInput class="number-input" v-model="value" :min="0" :max="1106000" :step="1000" width="100px" size="small" align="center" />
+        <VueNumberInput class="number-input" v-model="music.score" :min="0" :max="1106000" :step="1000" width="100px" size="small" align="center" />
         <v-card color="transparent" outlined height="24"></v-card>
          
     </v-card-text>
     <v-card-text v-else class="justify-center font-weight-black"  @click="isEditScore=true">
-        <div class="white--text" style="background-color: #646FD4;">{{value}}</div>
-        <div class="white--text" style="background-color: #646FD4;">{{percentage}}%</div>
+        <div class="white--text" style="background-color: #646FD4;">{{music.score === -1 ? 0 : music.score}}</div>
+        <div class="white--text" style="background-color: #646FD4;">{{music.percentage === -1 ? 0 : music.percentage}}%</div>
 
     </v-card-text>
     
     <v-card-actions class="music-img-wrapper">
         
-        <v-img :src="getDiskImg(music.NAME)" height="80" contain  :class="isEditScore ? 'music-img' : '' ">
+        <v-img :src="getDiskImg(music.name)" height="80" contain  :class="isEditScore ? 'music-img' : '' ">
             <template v-slot:placeholder>
                 <v-skeleton-loader
                 class="mx-auto"
@@ -27,11 +27,11 @@
             <v-checkbox class="checkbox" dense v-model="isNoMiss" label="No Miss" color="primary" ></v-checkbox>
             <div class="save-btn"><v-btn class="font-weight-bold mt-3" x-small @click="isEditScore=false" color="primary">저장</v-btn></div>       
         </v-row>
-        <v-img :class="isEditScore ? 'diff-img music-img' : 'diff-img'" :src="getDiffImg(music.DIFFICULTY)" width="30" height="15" contain  />
-        <v-img :class="isEditScore ? 'grade-img music-img' : 'grade-img'" :src="randGradeImg()" width="40" contain  />
+        <v-img :class="isEditScore ? 'diff-img music-img' : 'diff-img'" :src="getDiffImg(music.difficulty)" width="30" height="15" contain  />
+        <v-img :class="isEditScore ? 'grade-img music-img' : 'grade-img'" :src="getGradeImg(music.grade)" width="40" contain  />
         <!-- <v-img :class="isEditScore ? 'badge-img music-img' : 'badge-img'" :src="randBadgeImg()" width="40" contain  />           -->
     </v-card-actions>
-    <div v-if="isVisibleTitle" class="d-flex justify-center align-center music-title mx-1 font-weight-medium white--text" >{{music.NAME}}</div>
+    <div v-if="isVisibleTitle" class="d-flex justify-center align-center music-title mx-1 font-weight-medium" >{{music.name}}</div>
     </v-card>
 
     
@@ -91,7 +91,13 @@ export default {
             return this.badgeImgList[Math.floor(Math.random() * this.badgeImgList.length)]
         },
         getDiskImg(title){
-            return `/disk/${title}.webp`
+            return `/music_disk/${title}.webp`
+        },
+        getGradeImg(grade){
+            if(grade === ''){
+                return ''
+            }
+            return `/grade/${grade}.png`
         }
     }
 }

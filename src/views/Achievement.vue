@@ -157,6 +157,7 @@
 <script>
 import MusicCard from './MusicCard.vue'
 import firebase from 'firebase/app'
+import { mapActions } from 'vuex'
 export default {
     components:{
         MusicCard
@@ -197,12 +198,15 @@ export default {
         },
     },
     methods:{
+        ...mapActions([
+            'getAchievementList'
+        ]),
 
         getRankList(rank){    
-            return this.musicList.filter( x => x.RANKS === rank)
+            return this.musicList.filter( x => x.rank === rank)
         },
         getNoRankList(){
-            return this.musicList.filter( x => x.RANKS === 0).sort(function(a,b){
+            return this.musicList.filter( x => x.rank === 0).sort(function(a,b){
                 var nameA = a.NAME
                 var nameB = b.NAME
                 if (nameA < nameB) {
@@ -219,11 +223,21 @@ export default {
         getMusicList(){
             this.currentKey = this.$route.params.key
             this.currentLevel = Number(this.$route.params.level)
-            console.log(this.currentKey, this.currentLevel)
-            firebase.database().ref(this.currentKey).orderByChild('LEVEL').equalTo(this.currentLevel).once('value').then((snapshot) => {
-                this.musicList = Object.values(snapshot.toJSON())
-                this.maxRank = Math.max(...this.musicList.map(o => o.RANKS), 0);
-            });  
+            if(this.currentKey === '0' || this.currentLevel === 0){
+              this.musicList = []
+              this.maxRank = 0
+              return;
+            }
+            this.getAchievementList({key:this.currentKey, level: this.currentLevel})
+                .then(result => {
+                    this.musicList = result.data
+                    this.maxRank = Math.max(...this.musicList.map(o => o.rank), 0);
+                })
+
+            // firebase.database().ref(this.currentKey).orderByChild('LEVEL').equalTo(this.currentLevel).once('value').then((snapshot) => {
+            //     this.musicList = Object.values(snapshot.toJSON())
+            //     this.maxRank = Math.max(...this.musicList.map(o => o.RANKS), 0);
+            // });  
         }
 
 

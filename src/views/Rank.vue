@@ -15,10 +15,10 @@
     sm="8"
     class="mt-5"
   >
-    <v-card color="#1976D2" elevation="0" width="100%">
+    <v-card color="primary" elevation="0" width="100%">
       <v-row>
           <v-col cols="3" v-for="(item, idx) in keyLevelList" :key="idx"> 
-            <v-card width="100%" class="d-flex flex-column align-center" color="#1976D2" outlined>
+            <v-card width="100%" class="d-flex flex-column align-center" color="primary" outlined>
               <h2>{{item.key}}</h2>
               <v-btn 
               color="transparent" elevation="0" class="white--text font-weight-bold" 

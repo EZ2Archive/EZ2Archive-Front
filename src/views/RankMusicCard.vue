@@ -30,7 +30,7 @@ export default {
     },
     methods:{
         getDiskImg(title){
-            return `/disk/${title}.webp`
+            return `/music_disk/${title}.webp`
         },
         getDiffImg(diff){
             return `/difficulty/${diff}.png`
