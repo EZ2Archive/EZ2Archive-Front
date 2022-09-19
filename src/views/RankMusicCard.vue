@@ -13,7 +13,7 @@
         </v-img>
         <v-img class="diff-img" :src="getDiffImg(music.difficulty)" width="30" height="15" contain  />
     </v-card-actions>
-    <div v-if="isVisibleTitle" class="d-flex justify-center align-center music-title mx-1">{{music.NAME}}</div>
+    <div v-if="isVisibleTitle" class="d-flex justify-center align-center music-title mx-1">{{music.name}}</div>
     </v-card>
     
 </template>

@@ -81,12 +81,6 @@ export default {
         getDiffImg(diff){
             return `/difficulty/${diff}.png`
         },
-        randGradeImg(){
-            return this.gradeImgList[Math.floor(Math.random() * this.gradeImgList.length)]
-        },
-        randBadgeImg(){
-            return this.badgeImgList[Math.floor(Math.random() * this.badgeImgList.length)]
-        },
         getDiskImg(title){
             return `/music_disk/${title}.webp`
         },

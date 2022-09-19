@@ -29,7 +29,7 @@ export const setAuthInHeader = token => {
 
 export const auth = {
     login(userid, password) {
-        return request('post', '/login', {}, {userId: userid, password: password})
+        return request('post', '/login', {userId: userid, password: password}, {})
     },
 }
 
