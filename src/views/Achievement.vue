@@ -1,156 +1,156 @@
 <template>
-<div class="ma-0 achievement">
-
-    <v-card width="100%" img="/resource/page_bg.jpg" class="ma-0" tile min-width="1200">
-    <v-img src="/resource/page_bg.jpg" height="350" class="ma-0">
-        <v-row class="fill-height mx-5">
-            <v-col     
-            cols="2"
-            class="user-info"
-            >      
-            <h1 class="white--text">USER NAME</h1>
-            <h2 class="red--text">{{currentKey}}-{{currentLevel}}</h2>
-            </v-col>
-
-            <v-col
-            cols="4"
-            class="white--text d-flex flex-column align-center mt-5">
-                <div class="d-flexflex-row">
-                    <div class="float-left my-3 text-lg-h5 fill-width font-weight-black">OVERALL</div>
-                </div>
-                      
-                <div class="d-flex flex-row my-2">
-                    <h4 class="info-title">Rate Avg.</h4>
-                    <v-progress-linear
-                    class="ml-3"
-                    v-model="rateAverage"
-                    buffer-value="100"
-                    color="amber"
-                    height="17"
-                    ></v-progress-linear>
-                </div>
-                <div class="d-flex flex-row my-2 ">
-                    <h4 class="info-title">All Cool</h4>
-                    <v-progress-linear
-                    class="ml-3"
-                    v-model="allCoolCount"
-                    buffer-value="100"
-                    color="amber"
-                    height="17"
-                    ></v-progress-linear>
-                </div>
-                <div class="d-flex flex-row my-2">
-                    <h4 class="info-title">No Miss</h4>
-                    <v-progress-linear
-                    class="ml-3"
-                    v-model="noMissCount"
-                    buffer-value="100"
-                    color="amber"
-                    height="17"
-                    ></v-progress-linear>
-                </div>
-                <div class="d-flex flex-row my-2">
-                    <h4 class="info-title">S+++</h4>
-                    <v-progress-linear
-                    class="ml-3"
-                    v-model="tripleSCount"
-                    buffer-value="100"
-                    color="amber"
-                    height="17"
-                    ></v-progress-linear>
-                </div>
-                <div class="d-flex flex-row my-2">
-                    <h4 class="info-title">S++</h4>
-                    <v-progress-linear
-                    class="ml-3"
-                    v-model="doubleSCount"
-                    buffer-value="100"
-                    color="amber"
-                    height="17"
-                    ></v-progress-linear>
-                </div>
-                <div class="d-flex flex-row my-2">
-                    <h4 class="info-title">S+</h4>
-                    <v-progress-linear
-                    class="ml-3"
-                    v-model="singleSCount"
-                    buffer-value="100"
-                    color="amber"
-                    height="17"
-                    ></v-progress-linear>
-                </div>             
-            </v-col>
-            <v-col
-                cols="6"
-                class="d-flex flex-row align-end white--text filter-item">
-
-                <h2 class="my-10">FILTER</h2>
-                <v-card color="transparent" elevation="0" min-width="500">
-                <v-row>
-                    <v-col cols="12" > 
-                        <v-btn v-for="(key, idx) in keyList" :key="idx" x-large color="transparent" class="white--text font-weight-bold" elevation="0" :to="`/achievement/${key}/${currentLevel}`">{{key}}</v-btn>
-                    </v-col>
-                    <v-col cols="12">            
-                        <v-btn v-for="(level, idx) in levelList" :key="idx"   color="transparent" class="white--text font-weight-bold" elevation="0" :to="`/achievement/${currentKey}/${level}`" >{{level}}</v-btn>
-                    </v-col>
-
-                </v-row>
-                </v-card>
-
-            </v-col>
-        </v-row>
-    </v-img>
-    </v-card>
+<v-container id="achievement">
 
 
-            <v-card width="10%" outlined color="transparent" class="ml-8"><v-checkbox v-model="isVisibleTitle" label="곡제목 표시" ></v-checkbox></v-card>
-            
-            <div
-            v-for="(rank, index) in reverseKeys(maxRank)" :key="index">
-                <v-row no-gutters>
+    <div class="ma-0 achievement">
+
+        <v-card width="100%" img="/resource/page_bg.jpg" class="ma-0" tile min-width="1200">
+        <v-img src="/resource/page_bg.jpg" height="350" class="ma-0">
+            <v-row class="fill-height mx-5">
+                <v-col     
+                cols="2"
+                class="user-info"
+                >      
+                <h1 class="white--text">USER NAME</h1>
+                <h2 class="red--text">{{currentKey}}-{{currentLevel}}</h2>
+                </v-col>
+
                 <v-col
-                    cols="12"
-                    class="d-flex flex-row"
-                    
-                >
-                
-                    <v-card  width="5%" outlined color="transparent" class="ma-3">
-                        <h3>{{currentLevel}}.{{rank + 1}}</h3>
-                    </v-card>
-                    
-                    <v-card width="95%" outlined color="transparent" class="d-flex flex-row flex-wrap ma-3 align-self-center">
-                        <MusicCard :music="item" :isVisibleTitle="isVisibleTitle" v-for="(item, idx) in getRankList(rank + 1)" :key="idx" />
-                    </v-card>                    
-                </v-col> 
-                <hr width="95%" color="black"  align="center" class="my-3"/>
-                
-                </v-row>
-
-            </div>
-            <div v-show="getNoRankList().length">
-            <v-row no-gutters>
+                cols="4"
+                class="white--text d-flex flex-column align-center mt-5">
+                    <div class="d-flexflex-row">
+                        <div class="float-left my-3 text-lg-h5 fill-width font-weight-black">OVERALL</div>
+                    </div>
+                        
+                    <div class="d-flex flex-row my-2">
+                        <h4 class="info-title">Rate Avg.</h4>
+                        <v-progress-linear
+                        class="ml-3"
+                        v-model="rateAverage"
+                        buffer-value="100"
+                        color="amber"
+                        height="17"
+                        ></v-progress-linear>
+                    </div>
+                    <div class="d-flex flex-row my-2 ">
+                        <h4 class="info-title">All Cool</h4>
+                        <v-progress-linear
+                        class="ml-3"
+                        v-model="allCoolCount"
+                        buffer-value="100"
+                        color="amber"
+                        height="17"
+                        ></v-progress-linear>
+                    </div>
+                    <div class="d-flex flex-row my-2">
+                        <h4 class="info-title">No Miss</h4>
+                        <v-progress-linear
+                        class="ml-3"
+                        v-model="noMissCount"
+                        buffer-value="100"
+                        color="amber"
+                        height="17"
+                        ></v-progress-linear>
+                    </div>
+                    <div class="d-flex flex-row my-2">
+                        <h4 class="info-title">S+++</h4>
+                        <v-progress-linear
+                        class="ml-3"
+                        v-model="tripleSCount"
+                        buffer-value="100"
+                        color="amber"
+                        height="17"
+                        ></v-progress-linear>
+                    </div>
+                    <div class="d-flex flex-row my-2">
+                        <h4 class="info-title">S++</h4>
+                        <v-progress-linear
+                        class="ml-3"
+                        v-model="doubleSCount"
+                        buffer-value="100"
+                        color="amber"
+                        height="17"
+                        ></v-progress-linear>
+                    </div>
+                    <div class="d-flex flex-row my-2">
+                        <h4 class="info-title">S+</h4>
+                        <v-progress-linear
+                        class="ml-3"
+                        v-model="singleSCount"
+                        buffer-value="100"
+                        color="amber"
+                        height="17"
+                        ></v-progress-linear>
+                    </div>             
+                </v-col>
                 <v-col
-                    cols="12"
-                    class="d-flex flex-row"
-                    
-                >
-                
-                    <v-card  width="5%" outlined color="transparent" class="ma-3">
-                        <h3>미분류</h3>
+                    cols="6"
+                    class="d-flex flex-row align-end white--text filter-item">
+
+                    <h2 class="my-10">FILTER</h2>
+                    <v-card color="transparent" elevation="0" min-width="500">
+                    <v-row>
+                        <v-col cols="12" > 
+                            <v-btn v-for="(key, idx) in keyList" :key="idx" x-large color="transparent" class="white--text font-weight-bold" elevation="0" :to="`/achievement/${key}/${currentLevel}`">{{key}}</v-btn>
+                        </v-col>
+                        <v-col cols="12">            
+                            <v-btn v-for="(level, idx) in levelList" :key="idx"   color="transparent" class="white--text font-weight-bold" elevation="0" :to="`/achievement/${currentKey}/${level}`" >{{level}}</v-btn>
+                        </v-col>
+
+                    </v-row>
                     </v-card>
-                    
-                    <v-card width="95%" outlined color="transparent" class="d-flex flex-row flex-wrap ma-3 align-self-center">
-                        <MusicCard :music="item" :isVisibleTitle="isVisibleTitle" v-for="(item, idx) in getNoRankList()" :key="idx" />
-                    </v-card>              
-                </v-col> 
-                <hr width="95%" color="black"  align="center" class="my-3"/>               
+
+                </v-col>
             </v-row>
-            </div>
-           
-            
+        </v-img>
+        </v-card>
 
 
-</div>
+                <v-card width="10%" outlined color="transparent" class="ml-8"><v-checkbox v-model="isVisibleTitle" label="곡제목 표시" ></v-checkbox></v-card>
+                
+                <div
+                v-for="(rank, index) in reverseKeys(maxRank)" :key="index">
+                    <v-row no-gutters>
+                    <v-col
+                        cols="12"
+                        class="d-flex flex-row"
+                        
+                    >
+                    
+                        <v-card  width="5%" outlined color="transparent" class="ma-3">
+                            <h3>{{currentLevel}}.{{rank + 1}}</h3>
+                        </v-card>
+                        
+                        <v-card width="95%" outlined color="transparent" class="d-flex flex-row flex-wrap ma-3 align-self-center">
+                            <MusicCard :music="item" :isVisibleTitle="isVisibleTitle" v-for="(item, idx) in getRankList(rank + 1)" :key="idx" />
+                        </v-card>                    
+                    </v-col> 
+                    <hr width="95%" color="black"  align="center" class="my-3"/>
+                    
+                    </v-row>
+
+                </div>
+                <div v-show="getNoRankList().length">
+                <v-row no-gutters>
+                    <v-col
+                        cols="12"
+                        class="d-flex flex-row"
+                        
+                    >
+                    
+                        <v-card  width="5%" outlined color="transparent" class="ma-3">
+                            <h3>미분류</h3>
+                        </v-card>
+                        
+                        <v-card width="95%" outlined color="transparent" class="d-flex flex-row flex-wrap ma-3 align-self-center">
+                            <MusicCard :music="item" :isVisibleTitle="isVisibleTitle" v-for="(item, idx) in getNoRankList()" :key="idx" />
+                        </v-card>              
+                    </v-col> 
+                    <hr width="95%" color="black"  align="center" class="my-3"/>               
+                </v-row>
+                </div>
+    </div>
+</v-container>
 
 </template>
 
@@ -262,5 +262,12 @@ export default {
 
 .achievement{
     text-align: center;
+}
+#achievement{
+
+  margin: 0 auto;
+  width: 1200px;
+  min-width: 1200px;
+
 }
 </style>

@@ -8,7 +8,7 @@
     </v-card-text>
     <v-card-text v-else class="justify-center font-weight-black"  @click="isEditScore=true">
         <div class="white--text" style="background-color: #646FD4;">{{music.score === -1 ? 0 : music.score}}</div>
-        <div class="white--text" style="background-color: #646FD4;">{{music.percentage === -1 ? 0 : music.percentage}}%</div>
+        <div class="white--text" style="background-color: #646FD4;">{{music.percentage === -1 ? 0 : music.percentage.toFixed(2)}}%</div>
 
     </v-card-text>
     
