@@ -84,7 +84,6 @@ export default {
         },
         getDiskImg(title){
             const filename = match[title]
-            console.log(filename)
             return `/music_disk/${filename}`
         },
         getGradeImg(grade){
