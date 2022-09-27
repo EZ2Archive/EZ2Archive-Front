@@ -40,6 +40,7 @@
 <script>
 import VueNumberInput from 'vue-numeric-input'
 import { mapActions } from 'vuex'
+import match from '../common/match.json'
 export default {
     props: {
         music: Object,
@@ -82,7 +83,9 @@ export default {
             return `/difficulty/${diff}.png`
         },
         getDiskImg(title){
-            return `/music_disk/${title}.webp`
+            const filename = match[title]
+            console.log(filename)
+            return `/music_disk/${filename}`
         },
         getGradeImg(grade){
             if(grade === ''){
