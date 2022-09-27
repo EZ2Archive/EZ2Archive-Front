@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import match from '../common/match.json'
 export default {
     props: {
         music: Object,
@@ -30,7 +31,8 @@ export default {
     },
     methods:{
         getDiskImg(title){
-            return `/music_disk/${title}.webp`
+            const filename = match[title]
+            return `/music_disk/${filename}`
         },
         getDiffImg(diff){
             return `/difficulty/${diff}.png`
